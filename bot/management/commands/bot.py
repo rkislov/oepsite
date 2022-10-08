@@ -1,10 +1,12 @@
+from unittest import result
 from django.core.management.base import BaseCommand
 from django.conf import settings
-from telegram import Bot, Update
-from telegram.ext import CallbackContext, Filters, MessageHandler, Updater, CommandHandler, CallbackQueryHandler
+from telegram import Bot, Update, InlineQueryResultArticle, InputTextMessageContent
+from telegram.ext import CallbackContext, Filters, MessageHandler, Updater, CommandHandler, CallbackQueryHandler, InlineQueryHandler
 from telegram.utils.request import Request
 from bot.models import Profile, Message
 from subprocess import PIPE, Popen
+import requests
 
 
 def log_errors(f):
@@ -113,6 +115,28 @@ def do_time(update: Update, context: CallbackContext):
         reply_text
     )
 
+@log_errors
+def sd_status(update: Update, context: CallbackContext):
+    query = update.inline_query.query
+    if not query:
+        return
+    result = list()
+    url = 'https://sd.egov66.ru/get_status.php'
+    params = dict(IncidentNumber='221235011')
+    status = requests.get(url, params=params)
+    print(status.text)
+    result.append(
+        InlineQueryResultArticle(
+            id=query.upper(),
+            title= f'Ваша заявка под номером {query}',
+            input_message_content=status.text
+        )
+    )
+   # https://sd.egov66.ru/get_status.php?IncidentNumber=221235011
+    update.inline_query.id = result
+        
+    
+
 class Command(BaseCommand):
     help = "Телеграм-бот"
 
@@ -136,10 +160,12 @@ class Command(BaseCommand):
         message_hadler = MessageHandler(Filters.text, do_echo)
         help_handler = CommandHandler("help", do_help)
         time_handler = CommandHandler("time", do_time)
-        start_handler = CommandHandler("start", do_start) 
+        start_handler = CommandHandler("start", do_start)
+        inline_sd_status = InlineQueryHandler(sd_status) 
 
         message_hadler2 = CommandHandler("count", do_count)
 
+        updater.dispatcher.add_handler(inline_sd_status)
         updater.dispatcher.add_handler(start_handler)
         updater.dispatcher.add_handler(time_handler)
         updater.dispatcher.add_handler(help_handler)
