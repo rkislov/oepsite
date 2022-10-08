@@ -1,0 +1,18 @@
+{%block newsbox%}
+<div class="card my-4">
+    <h5 class="card-header">Новости и объявления</h5>
+    <div class="card-body">
+        {% for entry in news %}
+    <a href="{{entry.slug}}" class="text-dark" style='text-decoration: none'>{{entry.title}}
+    <br/>
+    <span style="font-size: 15px; color: grey">{{entry.created_on|date:"d.m.Y"}}</span>
+    {% if forloop.last %}
+    
+    {%else%}
+    <hr/>
+    {%endif%}
+    </a>
+    {% endfor %}    
+    </div>
+</div>
+{% endblock newsbox%}

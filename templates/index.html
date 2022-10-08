@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    body {
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+        background-color: #fdfdfd;
+    }
+
+    .head_text {
+        color: white;
+    }
+
+    .card {
+        box-shadow: 0 16px 48px #E3E7EB;
+    }
+    .box:hover {
+        box-shadow: 0 0 11px rgba(33,33,33,.2); 
+      }
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <!-- Blog Entries Column -->
+        <div class="col-md-8 mt-3 left">
+            {% for razdel in razdels %}
+            <a href="{% url 'razdel' razdel.slug  %}" class="text-dark box" style='text-decoration: none;'>
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h2 class="card-title"style='font-size: 20px;'>
+                        {{ razdel.fname }}
+                    </h2>
+                </div>
+            </a>
+            </div>
+            {% endfor %}
+            {% block newsbox %} {% include 'news/news_box.html' %} {% endblock newsbox %}
+        
+        </div>
+        <div class="col-md-4 float-right ">
+            {% block sidebar %} {% include 'sidebars/sidebar_main.html' %} {% endblock sidebar %}
+            {% block mcrrss %} {% include 'sidebars/mcrrss.html' %} {% endblock mcrrss %}
+            {% block zakupki %} {% include 'sidebars/zakupki.html' %} {% endblock zakupki %}
+        </div>
+    </div>
+</div>
+{%endblock%}

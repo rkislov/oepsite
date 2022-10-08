@@ -1,0 +1,22 @@
+{% block sidebar %}
+
+<style>
+        .card{
+            box-shadow: 0 16px 48px #E3E7EB;
+        }
+
+</style>
+
+<!-- Sidebar Widgets Column -->
+<div class="card my-4">
+        <h5 class="card-header">Быстрые ссылки</h5>
+    <div class="card-body">
+        {% for work in works %}
+        <p class="card-text"><a href="https://djangocentral.com/building-a-blog-application-with-django"
+            class="text-dark" style='text-decoration: none;'>{{work.sname}}</a></p>
+        {%endfor%}
+    </div>
+</div>
+
+
+{% endblock sidebar %}

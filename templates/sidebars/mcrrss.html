@@ -1,0 +1,30 @@
+{% block mcrrss %}
+
+<style>
+        .card{
+            box-shadow: 0 16px 48px #E3E7EB;
+        }
+
+</style>
+
+<!-- Sidebar Widgets Column -->
+
+<div class="card my-4">
+        <h5 class="card-header">Новости связи</h5>
+    <div class="card-body">
+        {% for entry in feed %}
+     <a href="{{entry.link}}" class="text-dark" style='text-decoration: none'>{{entry.title}}
+    <br/>
+     <span style="font-size: 15px; color: grey">{{entry.date|date:"d.m.Y"}}</span>
+     {% if forloop.last %}
+     
+     {%else%}
+     <hr/>
+     {%endif%}
+    </a>
+    {% endfor %}    
+    </div>
+</div>
+
+
+{% endblock mcrrss %}
