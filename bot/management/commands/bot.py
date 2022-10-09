@@ -1,4 +1,3 @@
-from unittest import result
 from django.core.management.base import BaseCommand
 from django.conf import settings
 from telegram import Bot, Update, InlineQueryResultArticle, InputTextMessageContent
@@ -6,7 +5,9 @@ from telegram.ext import CallbackContext, Filters, MessageHandler, Updater, Comm
 from telegram.utils.request import Request
 from bot.models import Profile, Message
 from subprocess import PIPE, Popen
+from uuid import uuid4
 import requests
+
 
 
 def log_errors(f):
@@ -31,7 +32,7 @@ def do_start(update: Update, context: CallbackContext):
             'name': update.message.from_user.username,
         }
     )
-    reply_text = "Добро пожаловать в телеграм бот \nГБУ СО ОЭП \nдля более пожробного знакомства воспользуйтесь командой /help"
+    reply_text = "Добро пожаловать в телеграм бот \nГБУ СО ОЭП \nдля более подробного знакомства воспользуйтесь командой /help"
     update.message.reply_text(
         reply_text
     )
@@ -122,18 +123,18 @@ def sd_status(update: Update, context: CallbackContext):
         return
     result = list()
     url = 'https://sd.egov66.ru/get_status.php'
-    params = dict(IncidentNumber='221235011')
+    params = dict(IncidentNumber={query})
     status = requests.get(url, params=params)
-    print(status.text)
+    #print(status.text)
     result.append(
         InlineQueryResultArticle(
-            id=query.upper(),
-            title= f'Ваша заявка под номером {query}',
-            input_message_content=status.text
+            id=str(uuid4()),
+            title= f'Проверить статус заявки № {query}',
+            input_message_content= InputTextMessageContent(f'статус заявки №{query} \n{status.text}')
         )
     )
    # https://sd.egov66.ru/get_status.php?IncidentNumber=221235011
-    update.inline_query.id = result
+    update.inline_query.answer(result)
         
     
 
@@ -157,7 +158,7 @@ class Command(BaseCommand):
             use_context=True
         )
 
-        message_hadler = MessageHandler(Filters.text, do_echo)
+        #message_hadler = MessageHandler(Filters.text, do_echo)
         help_handler = CommandHandler("help", do_help)
         time_handler = CommandHandler("time", do_time)
         start_handler = CommandHandler("start", do_start)
@@ -170,7 +171,7 @@ class Command(BaseCommand):
         updater.dispatcher.add_handler(time_handler)
         updater.dispatcher.add_handler(help_handler)
         updater.dispatcher.add_handler(message_hadler2)
-        updater.dispatcher.add_handler(message_hadler)
+        #updater.dispatcher.add_handler(message_hadler)
 
         updater.start_polling()
         updater.idle()
