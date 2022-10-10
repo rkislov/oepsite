@@ -1,6 +1,7 @@
 from re import template
 from django.shortcuts import render, get_object_or_404
 from .models import Post, Razdel, Work, RecentBlogPosts, Zakupki, News
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 
@@ -32,16 +33,37 @@ def PostDetailed(request, slug):
 
 def NewsList(request):
     razdels = Razdel.objects.all()
-    news = News.objects.filter(status=1).order_by('-created_on')
+    news = RecentBlogPosts.objects.order_by('-date')
     template_name = 'news/news_list.html'
-    return render(request, template_name, {'news': news,
-                                            'razdels': razdels,})
+    context = {
+        'razdels': razdels,
+        }
+    default_page = 1
+    page = request.GET.get('page',default_page)
+    paginator = Paginator(news,10)
+    try:
+        context['news_list'] = paginator.page(page)
+    except PageNotAnInteger:
+        context['news_list'] = paginator.page(1)
+    except EmptyPage:
+        context['news_list'] = paginator.page(paginator.num_pages)
+    return render(request, template_name, context)
                                             
 
-def NewsDetail(request, slug):
+def ZakupkiList(request):
     razdels = Razdel.objects.all()
-    news = get_object_or_404(News, slug=slug)
-    template_name = 'news_detailed.html'
-    return render(request, template_name, {'news': news,
-                                           'razdels': razdels,
-                                           })
+    zakupki = Zakupki.objects.order_by('-date')
+    template_name = 'news/zakupki_list.html'
+    context = {
+        'razdels': razdels,
+        }
+    default_page = 1
+    page = request.GET.get('page',default_page)
+    paginator = Paginator(zakupki,10)
+    try:
+        context['zakupki_list'] = paginator.page(page)
+    except PageNotAnInteger:
+        context['zakupki_list'] = paginator.page(1)
+    except EmptyPage:
+        context['zakupki_list'] = paginator.page(paginator.num_pages)
+    return render(request, template_name, context)

@@ -45,7 +45,8 @@
             background: linear-gradient(to bottom right, #70BFE1, #3D5DE0);
            
             height: auto;
-            padding-bottom: 40px;
+            height-min: 100px;
+            padding-bottom: 60px;
             box-shadow: 0 16px 48px #E3E7EB;
             padding-top: 10px;
         }
@@ -89,7 +90,7 @@
                         <div class="btn-group">
                             {% for razdel in razdels %}
                             <div class="dropdown">
-                                <button class="btn btn-link text-light box" type="button" data-toggle="dropdown" aria-expanded="false" style='text-decoration: none'>
+                                <button class="btn btn-link text-light" type="button" data-toggle="dropdown" aria-expanded="false" style='text-decoration: none'>
                                 {% if razdel.icon%} 
                                 <span>
                                     <div>

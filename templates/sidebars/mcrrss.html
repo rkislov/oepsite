@@ -10,7 +10,8 @@
 <!-- Sidebar Widgets Column -->
 
 <div class="card my-4">
-        <h5 class="card-header">Новости связи</h5>
+        <h5 class="card-header"><a href="{% url 'news_list'  %}" class="text-dark" style='text-decoration: none;'>
+            Новости связи</a></h5>
     <div class="card-body">
         {% for entry in feed %}
      <a href="{{entry.link}}" class="text-dark" style='text-decoration: none'>{{entry.title}}

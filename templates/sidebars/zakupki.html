@@ -11,7 +11,7 @@
 
 
 <div class="card my-4">
-        <h5 class="card-header">Закупки</h5>
+        <h5 class="card-header"><a href="{% url 'zakupki_list'  %}" class="text-dark" style='text-decoration: none;'>Закупки</a></h5>
     <div class="card-body">
         {% for entry in zakupki %}
      <a href="{{entry.link}}" class="text-dark" style='text-decoration: none'>{{entry.title}}
