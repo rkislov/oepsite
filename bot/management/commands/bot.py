@@ -119,6 +119,7 @@ def do_time(update: Update, context: CallbackContext):
 @log_errors
 def sd_status(update: Update, context: CallbackContext):
     query = update.inline_query.query
+    
     if not query:
         return
     result = list()

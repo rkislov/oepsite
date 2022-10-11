@@ -1,0 +1,19 @@
+{%block work_newsbox%}
+<div class="card my-4">
+    <h5 class="card-header text-center">Новости {{work.sname}}</h5>
+    <div class="card-body">
+        {% for entry in work.work_posts.all %}
+    <div class="card-title text-center"> {{entry.title}}</div>
+    <div class="card-text">{{entry.content|safe}}</div>
+    <br/>
+    <span style="font-size: 15px; color: grey">{{entry.created_on|date:"d.m.Y"}}</span>
+    {% if forloop.last %}
+    
+    {%else%}
+    <hr/>
+    {%endif%}
+    
+    {% endfor %}    
+    </div>
+</div>
+{% endblock work_newsbox%}

@@ -1,7 +1,10 @@
 from django.contrib import admin
 
-from .models import News, Razdel, Post, Work, News
+from .models import News, Razdel, Post, Work, News, File
 
+
+class FileAdmin(admin.TabularInline):
+    model = File
 
 class RazdelAdmin(admin.ModelAdmin):
     list_display = ('sname', 'fname', 'created_on')
@@ -14,6 +17,9 @@ class WorkAdmin(admin.ModelAdmin):
     list_filter = ("status",)
     search_fields = ['sname', 'description']
     prepopulated_fields = {'slug': ('sname',)}
+    inlines = [
+        FileAdmin,
+    ]
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -28,6 +34,7 @@ class NewsAdmin(admin.ModelAdmin):
     list_filter = ("status",)
     search_fields = ['title', 'desc']
     prepopulated_fields = {'slug': ('title',)}
+
 
 
 admin.site.register(Post, PostAdmin)
