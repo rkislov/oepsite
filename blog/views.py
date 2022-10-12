@@ -24,7 +24,14 @@ def PostList(request):
 
 def WorkDetailed(request, slug):
     razdels = Razdel.objects.all()
-    work = get_object_or_404(Work.objects.prefetch_related('work_files','work_posts'), slug=slug)
+    work = get_object_or_404(Work.objects.prefetch_related(
+        'work_files',
+        'work_posts', 
+        'work_news',
+        'work_instruction',
+        'work_zayavki',
+        'work_normativ',
+        ), slug=slug)
     template_name = 'razdel/work_detailed.html'
     return render(request, template_name, {'work': work,
                                            'razdels': razdels,

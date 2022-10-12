@@ -1,10 +1,20 @@
 from django.contrib import admin
 
-from .models import News, Razdel, Post, Work, News, File
+from .models import News, Razdel, Post, Work, News, File, Instruction, FZayavki, Normativ
 
 
 class FileAdmin(admin.TabularInline):
     model = File
+
+class InstructionAdmin(admin.TabularInline):
+    model = Instruction
+
+class FZayavkiAdmin(admin.TabularInline):
+    model = FZayavki
+
+class NormativAdmin(admin.TabularInline):
+    model = Normativ
+
 
 class RazdelAdmin(admin.ModelAdmin):
     list_display = ('sname', 'fname', 'created_on')
@@ -19,6 +29,9 @@ class WorkAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('sname',)}
     inlines = [
         FileAdmin,
+        InstructionAdmin,
+        FZayavkiAdmin,
+        NormativAdmin
     ]
 
 

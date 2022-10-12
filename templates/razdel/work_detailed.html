@@ -30,7 +30,7 @@
       </nav>
     <div class="row">
         <!-- Blog Entries Column -->
-        {%if work.work_files%}
+        {%if work.work_files or work.work_instructions or work.work_zayavki or work.work_normativ %}
         <div class="col-md-8 mt-3 left">
             <div class="card">
                 <div class="card-body">
@@ -39,9 +39,15 @@
                 </div>
               </div>
               {% block work_newsbox %} {% include 'razdel/work_newsbox.html' %} {% endblock work_newsbox %}
+              
         </div> 
         <div class="col-md-4 float-right ">
+          {% if work.work_zayavki %}
+            {% block work_zayavki %} {% include 'razdel/work_zayvki.html' %} {% endblock work_zayavki %}
+          {% endif %}
+          {% if work.work_files %}
             {% block sidebar %} {% include 'razdel/work_files.html' %} {% endblock sidebar %}
+          {% endif %}
         </div>
     </div>
         {%else%}

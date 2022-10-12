@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
-
+from django.utils import timezone
 
 class Razdel(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -127,7 +127,7 @@ class News(models.Model):
         null=True
     )
     class Meta:
-            #ordering = ['-created_on']
+            ordering = ['-created_on']
             verbose_name= "Новость"
             verbose_name_plural= "Новости"
 
@@ -147,6 +147,8 @@ class File(models.Model):
         related_name='files'
         )
     title = models.CharField(max_length=200)
+    update_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
     file = models.FileField(upload_to='files/')
     work = models.ForeignKey(
         Work,
@@ -155,6 +157,103 @@ class File(models.Model):
         default=0,
         null=True
     )
+
+    class Meta:
+        ordering = ['-created_on']
+        verbose_name= "Файл"
+        verbose_name_plural= "Файлы"
+
+    def __str__(self):
+        return self.title
+    
+    def path(self):
+        return self.url
+
+
+class Instruction(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='instructions'
+        )
+    title = models.CharField(max_length=200)
+    file = models.FileField(upload_to='files/')
+    update_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    work = models.ForeignKey(
+        Work,
+        on_delete=models.CASCADE,
+        related_name="work_instruction",
+        default=0,
+        null=True
+    )
+
+    class Meta:
+        ordering = ['-created_on']
+        verbose_name= "Инструкция"
+        verbose_name_plural= "Инструкции"
+
+    def __str__(self):
+        return self.title
+    
+    def path(self):
+        return self.url
+
+class FZayavki(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='zayavki'
+        )
+    title = models.CharField(max_length=200)
+    file = models.FileField(upload_to='files/')
+    update_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    work = models.ForeignKey(
+        Work,
+        on_delete=models.CASCADE,
+        related_name="work_zayavki",
+        default=0,
+        null=True
+    )
+
+    class Meta:
+        ordering = ['-created_on']
+        verbose_name= "Форма заявки"
+        verbose_name_plural= "Формы заявок"
+
+    def __str__(self):
+        return self.title
+    
+    def path(self):
+        return self.url
+
+
+class Normativ(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='normativs'
+        )
+    title = models.CharField(max_length=200)
+    file = models.FileField(upload_to='files/')
+    update_on = models.DateTimeField(auto_now=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    work = models.ForeignKey(
+        Work,
+        on_delete=models.CASCADE,
+        related_name="work_normativ",
+        default=0,
+        null=True
+    )
+
+    class Meta:
+        ordering = ['-created_on']
+        verbose_name= "Нормативный документ"
+        verbose_name_plural= "Нормативные документы"
 
     def __str__(self):
         return self.title
