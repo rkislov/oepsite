@@ -1,4 +1,4 @@
-{% block work_files %}
+{% block work_instructions %}
 
 <style>
         .card{
@@ -11,10 +11,10 @@
 
 <div class="card my-4">
         <h5 class="card-header">
-            Файлы</h5>
+            Инструкции</h5>
     <div class="card-body">
-        {% for entry in work.work_files.all %}
-     <a href="{{entry.file.url}}" class="text-dark text-justify" style='text-decoration: none'>{{entry.title}}
+        {% for entry in work.work_instruction.all %}
+     <a href="{{entry.file.url}}" class="text-dark" style='text-decoration: none'>{{entry.title}}
     <br/>
      <span style="font-size: 15px; color: grey">{{entry.date|date:"d.m.Y"}}</span>
      {% if forloop.last %}
@@ -28,4 +28,4 @@
 </div>
 
 
-{% endblock work_files %}
+{% endblock work_instructions %}

@@ -133,6 +133,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CKEDITOR_UPLOAD_PATH = "uploads/"
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Advanced',
+    },
+}
+
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",

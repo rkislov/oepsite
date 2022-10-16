@@ -24,15 +24,14 @@
       <li class="breadcrumb-item active" aria-current="page">Закупки</li>
     </ol>
 </nav>
-<div class="container">
 
 <div class="container">
     <div class="row">
-        <div class="card my-4">
+        <div class="card col-12 my-4">
             <h5 class="card-header">Закупки</h5>
             {% if zakupki_list %}
                 <div class="card-body">
-                    {% for entry in zakupki_list %}
+                {% for entry in zakupki_list %}
                 <a href="{{entry.link}}" class="text-dark" style='text-decoration: none'>{{entry.title}}
                 <br/>
                 <span style="font-size: 15px; color: grey">{{entry.date|date:"d.m.Y"}}</span>
@@ -46,28 +45,28 @@
                 </div>
             </div>
         </div>
-                {% if news_list.has_other_pages %}
+                {% if zakupki_list.has_other_pages %}
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        {% if news_list.has_previous %}
+                        {% if zakupki_list.has_previous %}
                         <li class="page-item">
-                            <a class="page-link" href="?page={{ news_list.previous_page_number }}" tabindex="-1" aria-disabled="true">Назад</a>
+                            <a class="page-link" href="?page={{ zakupki_list.previous_page_number }}" tabindex="-1" aria-disabled="true">Назад</a>
                           </li>
                       {% else %}
                       <li class="page-item disabled">
                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Назад</a>
                       </li>
                       {% endif %}
-                      {% for page_number in news_list.paginator.page_range %}
-                        {% if news_list.number == page_number %}
+                      {% for page_number in zakupki_list.paginator.page_range %}
+                        {% if zakupki_list.number == page_number %}
                           <li class="page-item active"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
                           {% else %}
                           <li class="page-item"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
                           {% endif %}
                           {% endfor %}
-                          {% if news_list.has_next %}
+                          {% if zakupki_list.has_next %}
                             <li class="page-item">
-                                <a class="page-link" href="?page={{ news_list.next_page_number }}">Вперед</a>
+                                <a class="page-link" href="?page={{ zakupki_list.next_page_number }}">Вперед</a>
                             </li>
                           {%else%}
                           <li class="page-item disabled">
@@ -80,7 +79,7 @@
                
                 {% endif %}
             {% else %}
-                <p>Новостей не загружено</p>
+                <p>Закупок не загружено</p>
             {% endif %}
         </div>
         

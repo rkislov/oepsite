@@ -27,11 +27,11 @@
 
 <div class="container">
     <div class="row">
-        <div class="card my-4">
+        <div class="card col-12 my-4">
             <h5 class="card-header">Новости и объявления</h5>
             {% if news_list %}
                 <div class="card-body">
-                    {% for entry in news_list %}
+                {% for entry in news_list %}
                 <a href="{{entry.link}}" class="text-dark" style='text-decoration: none'>{{entry.title}}
                 <br/>
                 <span style="font-size: 15px; color: grey">{{entry.date|date:"d.m.Y"}}</span>
@@ -43,8 +43,8 @@
                 </a>
                 {% endfor %}    
                 </div>
-            </div>
         </div>
+    </div>
                 {% if news_list.has_other_pages %}
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
@@ -81,10 +81,5 @@
             {% else %}
                 <p>Новостей не загружено</p>
             {% endif %}
-        </div>
-        
-       
-        
-    </div>
-</div>
+
 {%endblock%}
