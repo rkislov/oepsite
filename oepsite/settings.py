@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'oepsite.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-print(os.getenv('USER_NAME'))
+
 DATABASES = {
     'default': {
         'ENGINE': os.getenv('ENGINE'),
