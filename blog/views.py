@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 def PostList(request):
-    razdels = Razdel.objects.prefetch_related('razdel_work')
+    razdels = Razdel.objects.prefetch_related('razdel_work').order_by('created_on')
     posts = Post.objects.filter(status=1).order_by('-created_on')
     works = Work.objects.filter(status=1)
     feed = RecentBlogPosts.objects.all()[:3]
