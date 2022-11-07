@@ -2,7 +2,7 @@ from django.db import models
 import uuid
 
 class Profile(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,max_length=36)
     external_id = models.PositiveIntegerField(
         verbose_name='ID пользователя в социальной сети',
         unique=True
@@ -22,7 +22,7 @@ class Profile(models.Model):
 
 
 class Message(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,max_length=36)
     profile = models.ForeignKey(
         Profile,
         verbose_name='Профиль',
