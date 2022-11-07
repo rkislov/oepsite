@@ -12,7 +12,7 @@
         <h5 class="card-header">Быстрые ссылки</h5>
     <div class="card-body">
         {% for work in works %}
-        <p class="card-text"><a href="{% url 'razdel' work.slug%}"
+        <p class="card-text"><a href="{% url 'work' work.slug%}"
             class="text-dark" style='text-decoration: none;'>{{work.sname}}</a></p>
         {%endfor%}
     </div>
