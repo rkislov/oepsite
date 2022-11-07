@@ -30,7 +30,7 @@
       </nav>
     <div class="row">
         <!-- Blog Entries Column -->
-        {%if work.work_files or work.work_instruction or work.work_zayavki or work.work_normativ %}
+        {%if work.work_files.all or work.work_instruction.all or work.work_zayavki.all or work.work_normativ.all %}
         <div class="col-md-8 mt-3 left">
             <div class="card">
                 <div class="card-body">
@@ -38,20 +38,21 @@
                   <p class="card-text">{{work.content|safe}}</p>
                 </div>
               </div>
+              {% if work.work_news.all %}
               {% block work_newsbox %} {% include 'razdel/work_newsbox.html' %} {% endblock work_newsbox %}
-              
+              {% endif %}
         </div> 
         <div class="col-md-4 float-right ">
-          {% if work.work_zayavki %}
+          {% if work.work_zayavki.all %}
             {% block work_zayavki %} {% include 'razdel/work_zayvki.html' %} {% endblock work_zayavki %}
           {% endif %}
-          {% if work.work_files %}
+          {% if work.work_files.all %}
             {% block work_files %} {% include 'razdel/work_files.html' %} {% endblock work_files %}
           {% endif %}
-          {% if work.work_instruction %}
+          {% if work.work_instruction.all %}
             {% block work_instruction %} {% include 'razdel/work_instruction.html' %} {% endblock work_instruction %}
           {% endif %}
-          {% if work.work_normativ %}
+          {% if work.work_normativ.all %}
             {% block work_normativ %} {% include 'razdel/work_normativ.html' %} {% endblock work_normativ %}
           {% endif %}
         </div>
