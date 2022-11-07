@@ -14,7 +14,7 @@ TEMPLATES_DIRS = os.path.join(BASE_DIR,'templates')
 SECRET_KEY = 'django-insecure-z*kkn15-wpsr$5hp0rlp8+u)ct9^1awo6gjc5z-ht@$)l^2nvh'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -169,3 +169,5 @@ REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 # По умолчанию пароля нет. Он будет на сервере
 REDIS_PASSWORD = None
+
+SITE_ID=1
