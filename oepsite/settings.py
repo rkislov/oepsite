@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'bot',
+    'webpush',
     
 ]
 
@@ -100,7 +101,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+WEBPUSH_SETTINGS = {
+   "VAPID_PUBLIC_KEY": "BGJJXd1mGIDjk7-SmbsW1mhRJ1kSWQcR5RGX99j3G4_FT9RWTPC6iME3RyXzTNSdflWq6JBzXqdJWGitrI4rwBk",
+   "VAPID_PRIVATE_KEY": "VpR1EBjkkYvK9MIV2NZ5a1nzE8n-lf_IDc4eHzP7rVk",
+   "VAPID_ADMIN_EMAIL": "roman@kislovs.ru"
+}
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 

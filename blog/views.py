@@ -1,6 +1,6 @@
 from re import template
 from django.shortcuts import render, get_object_or_404
-from .models import Post, Razdel, Work, RecentBlogPosts, Zakupki, News
+from .models import Post, Razdel, Work, RecentBlogPosts, Zakupki, News, RecentBdu
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
@@ -12,13 +12,25 @@ def PostList(request):
     feed = RecentBlogPosts.objects.all()[:3]
     zakupki = Zakupki.objects.order_by('-date').all()[:3]
     news = News.objects.filter(status=1).order_by('-created_on')[:3]
+    bdus = RecentBdu.objects.all()[:3]
     template_name = 'index.html'
     return render(request, template_name, {'posts': posts,
                                            'razdels': razdels,
                                            'works': works,
                                            'feed': feed,
                                            'zakupki': zakupki,
-                                           'news': news
+                                           'news': news,
+                                           'bdus': bdus,
+                                            })
+def WorkList(request, slug):
+    razdels = Razdel.objects.prefetch_related('razdel_work')
+    work = Work.objects.filter(status=1).filter(slug=slug)
+    works = Work.objects.filter(status=1)
+    template_name = 'razdel/index.html'
+    return render(request, template_name, {
+                                        'razdels': razdels,
+                                        'work': work,
+                                        'works': works
                                             })
 
 

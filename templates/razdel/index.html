@@ -22,9 +22,8 @@
 
 <div class="container">
     <div class="row">
-
         <!-- Blog Entries Column -->
-        <div class="col-md-8 mt-3 left">
+        <div class="col-md-12 mt-3 left">
             {% for razdel in razdels %}
             <a href="{% url 'razdel' razdel.slug  %}" class="text-dark box" style='text-decoration: none;'>
             <div class="card mb-2">
@@ -36,15 +35,4 @@
             </a>
             </div>
             {% endfor %}
-            {% block newsbox %} {% include 'news/news_box.html' %} {% endblock newsbox %}
-        
-        </div>
-        <div class="col-md-4 float-right ">
-            {% block sidebar %} {% include 'sidebars/sidebar_main.html' %} {% endblock sidebar %}
-            {% block mcrrss %} {% include 'sidebars/mcrrss.html' %} {% endblock mcrrss %}
-            {% block zakupki %} {% include 'sidebars/zakupki.html' %} {% endblock zakupki %}
-            {% block bdu %} {% include 'sidebars/bdu.html' %} {% endblock bdu %}
-        </div>
-    </div>
-</div>
 {%endblock%}

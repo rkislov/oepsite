@@ -104,6 +104,13 @@ class Zakupki(models.Model):
     date = models.DateTimeField()
 
 
+class RecentBdu(models.Model):
+    title = models.CharField(max_length=200)
+    link = models.CharField(max_length=2048)
+    desc = models.TextField(null=True, blank=True)
+    date = models.DateTimeField()
+
+
 class News(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=500)
