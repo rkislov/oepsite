@@ -7,7 +7,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone
 
 class Razdel(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,max_length=36)
     icon = models.CharField(max_length=2000, blank=True, null=True)
     sname = models.CharField(max_length=50, unique=True)
     fname = models.CharField(max_length=500, unique=True)
@@ -28,7 +28,7 @@ class Razdel(models.Model):
         return self.sname
 
 class Work(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,max_length=36)
     sname = models.CharField(max_length=50, unique=True)
     fname = models.CharField(max_length=500, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
@@ -59,7 +59,7 @@ class Work(models.Model):
 
 
 class Post(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,max_length=36)
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(
@@ -112,7 +112,7 @@ class RecentBdu(models.Model):
 
 
 class News(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,max_length=36)
     title = models.CharField(max_length=500)
     desc = RichTextUploadingField(blank=True, null=True)
     parent_id = models.UUIDField(blank=True, null=True)
@@ -147,7 +147,7 @@ class News(models.Model):
 
 
 class File(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,max_length=36)
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -178,7 +178,7 @@ class File(models.Model):
 
 
 class Instruction(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,max_length=36)
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -208,7 +208,7 @@ class Instruction(models.Model):
         return self.url
 
 class FZayavki(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,max_length=36)
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -239,7 +239,7 @@ class FZayavki(models.Model):
 
 
 class Normativ(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False,max_length=36)
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
